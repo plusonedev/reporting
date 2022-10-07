@@ -1,0 +1,49 @@
+---
+# report configuration data
+app_id: 22
+report_type: xml
+report_id: 3
+base_population: promotion.users
+cumulative_start_event: promotion.starts_on # overridable with date
+# store a single piece of data
+time_periods:
+  weekly: # give the time period some name relevant to the report
+    - date_range:
+      start: 2022-06-01
+      end: 2022-06-08
+    - date_range:
+      start: 2022-06-09
+      end: 2022-06-16
+  first_monday:
+    - date: # single date, not range
+      value: 2022-10-03
+data_points:
+  - data_name: registered
+    unique_name: registered_users
+    source: REN::User
+    cumulative: true
+    periodic: true
+    period_source: weekly
+  - name: registered
+    source: REN::User
+# periodic data_points will be saved as follows
+
+#   :data_points => {
+#     :registered_users => {
+#       :cumulative => # cumulative data
+#       :periodic => {
+#         '2022-06-01:2022-06-08' => data_object, # data for this datapoint from the time period
+#         '2022-06-09:2022-06-16' => data_object
+#       }
+#     }
+#   }
+#
+#
+#
+#
+#
+#
+#
+#
+#
+
